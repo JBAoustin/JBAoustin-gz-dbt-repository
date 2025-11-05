@@ -1,10 +1,49 @@
- # schema.yml
+# schema.yml
 
- version: 2
+version: 2
 
- sources:
-   - name: gz_raw_data
-     tables:
-       - name: raw_gz_sales
-       - name: raw_gz_product
-       - name: raw_gz_ship
+sources:
+  - name: gz_raw_data
+    tables:
+      - name: raw_gz_sales
+        identifier: raw_gz_sales
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: order_id
+            description: numero de la commande
+          - name: pdt_id
+            description: numero du produit
+          - name: revenu
+            description: prix du produit
+          - name: quantity
+            description: nombre de produit en stock
+      - name: raw_gz_product
+        identifier: raw_gz_product
+        description: Product of Greenweez / we have on row per product_id found in each orders_id
+        columns:
+          - name: products_id
+            description: id du produit
+            tests: 
+            - unique
+            - not_null
+          - name: purchSE_PRICE
+            description: prix achat
+      - name: raw_gz_ship
+        identifier: raw_gz_ship
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        columns:
+          - name: orders_id
+            description: numero de commande
+            tests:
+            - unique
+            - not_null
+          - name: shipping_fee
+            description: taxe de frais de port
+          - name: shipping_fee_1
+            description: taxe de frais de port fois deux
+          - name: logCost
+            description: cout logistique
+          - name: ship_cost
+            description: frais de port
